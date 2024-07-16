@@ -66,11 +66,13 @@
             {
                 return new Range[] { new Range(0, 0) };
             }
-            else if (From2 < To)
+
+            if (From2 < To)
             {
                 return new Range[] { new Range(From, From2) };
             }
-            else if (From2 > From && To2 < To)
+
+            if (From2 > From && To2 < To)
             {
                 return new Range[] { new Range(From, From2), new Range(To2, To) };
             }

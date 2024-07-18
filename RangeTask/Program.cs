@@ -1,77 +1,83 @@
-﻿namespace RangeTask
+﻿namespace RangeTask;
+
+internal class Program
 {
-    internal class Program
+    static void Main(string[] args)
     {
-        static void Main(string[] args)
+        Console.WriteLine("Введите начальное число интервала:");
+        double from1 = Convert.ToDouble(Console.ReadLine());
+
+        Console.WriteLine("Введите конечное число интервала:");
+        double to1 = Convert.ToDouble(Console.ReadLine());
+
+        Range range1 = new Range(from1, to1);
+
+        Console.WriteLine("Длина интервала равна: " + range1.GetLength());
+
+        Console.WriteLine("Введите любое число:");
+        double number = Convert.ToDouble(Console.ReadLine());
+
+        if (range1.IsInside(number))
         {
-            Console.WriteLine("Введите начальное число диапазона");
-            double from = Convert.ToDouble(Console.ReadLine());
+            Console.WriteLine("Число " + number + " принадлежит интервалу");
+        }
+        else
+        {
+            Console.WriteLine("Число " + number + " не принадлежит интервалу");
+        }
 
-            Console.WriteLine("Введите конечное число диапазона");
-            double to = Convert.ToDouble(Console.ReadLine());
+        Console.WriteLine("Введите начальное число интервала 1:");
+        from1 = Convert.ToDouble(Console.ReadLine());
 
-            Range range = new Range(from, to);
+        Console.WriteLine("Введите конечное число интервала 1:");
+        to1 = Convert.ToDouble(Console.ReadLine());
 
-            Console.WriteLine("Длина диапазона равна : " + range.GetRangeLength());
+        Console.WriteLine("Введите начальное число интервала 2:");
+        double from2 = Convert.ToDouble(Console.ReadLine());
 
-            Console.WriteLine("Введите любое число");
-            double inputNumber = Convert.ToDouble(Console.ReadLine());
+        Console.WriteLine("Введите конечное число интервала 2:");
+        double to2 = Convert.ToDouble(Console.ReadLine());
 
-            if (range.IsInside(inputNumber))
+        range1 = new Range(from1, to1);
+
+        Range range2 = new Range(from2, to2);
+
+        Range? intersection = range1.GetIntersection(range2);
+
+        if (intersection is not null)
+        {
+            Console.WriteLine("Интервал-пересечение двух интервалов равен: " + intersection.ToString());
+        }
+        else
+        {
+            Console.WriteLine("Нет интервала-пересечения");
+        }
+
+        Range[]? union = range1.GetUnion(range2);
+
+        if (union is null)
+        {
+            Console.WriteLine("Объединения двух интервалов нет");
+        }
+        else
+        {
+            foreach (Range range in union)
             {
-                Console.WriteLine("Число " + inputNumber + " принадлежит диапазону");
+                Console.WriteLine("Объединение двух интервалов равно : " + range.ToString());
             }
-            else
+        }
+
+        Range[]? difference = range1.GetDifference(range2);
+
+        if (difference is null)
+        {
+            Console.WriteLine("Разности интервалов нет");
+        }
+        else
+        {
+            foreach (Range range in difference)
             {
-                Console.WriteLine("Число " + inputNumber + " не принадлежит диапазону");
-            }
-
-            Console.WriteLine("Введите начальное число диапазона 1");
-            double from1 = Convert.ToDouble(Console.ReadLine());
-
-            Console.WriteLine("Введите конечное число диапазона 1");
-            double to1 = Convert.ToDouble(Console.ReadLine());
-
-            Console.WriteLine("Введите начальное число диапазона 2");
-            double from2 = Convert.ToDouble(Console.ReadLine());
-
-            Console.WriteLine("Введите конечное число диапазона 2");
-            double to2 = Convert.ToDouble(Console.ReadLine());
-
-            Range range1 = new Range(from1, to1, from2, to2);
-
-            Range rangeIntersection = range1.GetRangeIntersection();
-
-            if (rangeIntersection is not null)
-            {
-                Console.WriteLine("Интервал-пересечение двух интервалов равен " + (rangeIntersection.To - rangeIntersection.From));
-            }
-            else
-            {
-                Console.WriteLine("Нет интервала-пересечения");
-            }
-
-            Range range2 = new Range(from1, to1, from2, to2);
-
-            Range[] rangeUnion = range2.GetRangeUnion();
-
-            foreach (Range e in rangeUnion)
-            {
-                Console.WriteLine("Объединение двух интервалов равно" + (e.To - e.From));
-            }
-
-            Range range3 = new Range(from1, to1, from2, to2);
-
-            Range[] rangeDifference = range3.GetRangeDifference();
-
-            foreach (Range e in rangeDifference)
-            {
-                if (rangeDifference is null)
-                {
-                    Console.WriteLine("Интервалы не пересекаются");
-                }
-
-                Console.WriteLine("Разность двух интервалов равна" + (e.To - e.From));
+                Console.WriteLine("Разность двух интервалов равна: " + range.ToString());
             }
         }
     }

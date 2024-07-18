@@ -1,83 +1,102 @@
-﻿namespace RangeTask
+﻿using System;
+
+namespace RangeTask;
+
+public class Range
 {
-    public class Range
+    public double From { get; set; }
+
+    public double To { get; set; }
+
+    public Range(double from, double to)
     {
-        public double From { get; set; }
+        From = from;
+        To = to;
+    }
 
-        public double To { get; set; }
+    public double GetLength()
+    {
+        return To - From;
+    }
 
-        public double From2 { get; set; }
+    public bool IsInside(double number)
+    {
+        return number >= From && number <= To;
+    }
 
-        public double To2 { get; set; }
-
-
-        public Range(double from, double to)
+    public Range? GetIntersection(Range range)
+    {
+        if (this.From < range.From && this.To > range.To)
         {
-            From = from;
-            To = to;
+            return new Range(range.From, range.To);
         }
 
-        public Range(double from1, double to1, double from2, double to2)
+        if (this.From > range.From && this.To < range.To)
         {
-            From = from1;
-            To = to1;
-            From2 = from2;
-            To2 = to2;
+            return new Range(this.From, this.To);
         }
 
-        public double GetRangeLength()
+        if (this.To > range.From)
         {
-            return To - From;
+            return new Range(range.From, this.To);
         }
 
-        public bool IsInside(double inputNumber)
+        if (this.From > range.From)
         {
-            if (inputNumber >= From && inputNumber <= To)
-            {
-                return true;
-            }
-
-            return false;
+            return new Range(this.From, range.To);
         }
 
-        public Range GetRangeIntersection()
-        {
-            if (To > From2)
-            {
-                return new Range(From2, To);
-            }
+        return null;
+    }
 
-            return null;
+    public Range[]? GetUnion(Range range)
+    {
+        if (this.From <= range.From && this.To >= range.To)
+        {
+            return new Range[] { new Range(this.From, this.To) };
         }
 
-        public Range[] GetRangeUnion()
+        if (this.From >= range.From && this.To <= range.To)
         {
-            if (To >= From2)
-            {
-                return new Range[] { new Range(From, To2) };
-            }
-
-            return new Range[] { new Range(From, To), new Range(From2, To2) };
+            return new Range[] { new Range(range.From, range.To) };
         }
 
-        public Range[] GetRangeDifference()
+        if (this.To >= range.From)
         {
-            if (From == From2 && To == To2)
-            {
-                return new Range[] { new Range(0, 0) };
-            }
-
-            if (From2 < To)
-            {
-                return new Range[] { new Range(From, From2) };
-            }
-
-            if (From2 > From && To2 < To)
-            {
-                return new Range[] { new Range(From, From2), new Range(To2, To) };
-            }
-
-            return null;
+            return new Range[] { new Range(this.From, range.To) };
         }
+
+        if (this.From >= range.From)
+        {
+            return new Range[] { new Range(range.From, this.To) };
+        }
+
+        return null;
+    }
+
+    public Range[]? GetDifference(Range range)
+    {
+        if (this.From < range.From && this.To > range.To)
+        {
+            return new Range[] { new Range(this.From, range.From), new Range(range.To, this.To) };
+        }
+
+        if (this.From < range.From)
+        {
+            return new Range[] { new Range(this.From, range.From) };
+        }
+
+        if (this.To > range.To)
+        {
+            return new Range[] { new Range(range.To, this.To) };
+        }
+
+        return new Range[] { };
+    }
+
+    public override string ToString()
+    {
+        return this.From + ", " + this.To;
     }
 }
+

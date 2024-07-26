@@ -1,4 +1,6 @@
-﻿namespace RangeTask;
+﻿using System;
+
+namespace RangeTask;
 
 internal class Program
 {
@@ -71,16 +73,11 @@ internal class Program
 
         Range[] difference = range1.GetDifference(range2);
 
-        if (difference is null)
+        Console.WriteLine("Разность двух интервалов равна: ");
+
+        foreach (Range range in difference)
         {
-            Console.WriteLine("Разности интервалов нет");
-        }
-        else
-        {
-            foreach (Range range in difference)
-            {
-                Console.WriteLine("Разность двух интервалов равна: " + range);
-            }
+            Console.WriteLine(range);
         }
     }
 }

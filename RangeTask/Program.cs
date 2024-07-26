@@ -1,4 +1,6 @@
-﻿namespace RangeTask;
+﻿using System;
+
+namespace RangeTask;
 
 internal class Program
 {
@@ -46,28 +48,30 @@ internal class Program
 
         if (intersection is not null)
         {
-            Console.WriteLine("Интервал-пересечение двух интервалов равен: " + intersection.ToString());
+            Console.WriteLine("Интервал-пересечение двух интервалов равен: " + intersection);
         }
         else
         {
             Console.WriteLine("Нет интервала-пересечения");
         }
 
-        Range[]? union = range1.GetUnion(range2);
+        Range[] union = range1.GetUnion(range2);
 
-        if (union is null)
+        if (union.Length == 1)
         {
-            Console.WriteLine("Объединения двух интервалов нет");
+            Console.WriteLine("Объединение двух интервалов равно : " + union[0]);
         }
         else
         {
+            Console.WriteLine("Интервалы не пересекаются: ");
+
             foreach (Range range in union)
             {
-                Console.WriteLine("Объединение двух интервалов равно : " + range.ToString());
+                Console.WriteLine(range);
             }
         }
 
-        Range[]? difference = range1.GetDifference(range2);
+        Range[] difference = range1.GetDifference(range2);
 
         if (difference is null)
         {
@@ -77,7 +81,7 @@ internal class Program
         {
             foreach (Range range in difference)
             {
-                Console.WriteLine("Разность двух интервалов равна: " + range.ToString());
+                Console.WriteLine("Разность двух интервалов равна: " + range);
             }
         }
     }

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace RangeTask;
+﻿namespace RangeTask;
 
 public class Range
 {
@@ -26,69 +24,44 @@ public class Range
 
     public Range? GetIntersection(Range range)
     {
-        if (this.From < range.From && this.To > range.To)
+        if (To <= range.From || From >= range.To)
         {
-            return new Range(range.From, range.To);
+            return null;
         }
 
-        if (this.From > range.From && this.To < range.To)
-        {
-            return new Range(this.From, this.To);
-        }
-
-        if (this.To > range.From)
-        {
-            return new Range(range.From, this.To);
-        }
-
-        if (this.From > range.From)
-        {
-            return new Range(this.From, range.To);
-        }
-
-        return null;
+        return new Range(Math.Max(From, range.From), Math.Min(To, range.To));
     }
 
-    public Range[]? GetUnion(Range range)
+    public Range[] GetUnion(Range range)
     {
-        if (this.From <= range.From && this.To >= range.To)
+        if (To < range.From || From > range.To)
         {
-            return new Range[] { new Range(this.From, this.To) };
+            return new Range[] { new Range(From, To), new Range(range.From, range.To) };
         }
 
-        if (this.From >= range.From && this.To <= range.To)
-        {
-            return new Range[] { new Range(range.From, range.To) };
-        }
-
-        if (this.To >= range.From)
-        {
-            return new Range[] { new Range(this.From, range.To) };
-        }
-
-        if (this.From >= range.From)
-        {
-            return new Range[] { new Range(range.From, this.To) };
-        }
-
-        return null;
+        return new Range[] { new Range(Math.Min(From, range.From), Math.Max(To, range.To)) };
     }
 
-    public Range[]? GetDifference(Range range)
+    public Range[] GetDifference(Range range)
     {
-        if (this.From < range.From && this.To > range.To)
+        if (From < range.From && To > range.To)
         {
-            return new Range[] { new Range(this.From, range.From), new Range(range.To, this.To) };
+            return new Range[] { new Range(From, range.From), new Range(range.To, To) };
         }
 
-        if (this.From < range.From)
+        if (From < range.From)
         {
-            return new Range[] { new Range(this.From, range.From) };
+            return new Range[] { new Range(From, range.From) };
         }
 
-        if (this.To > range.To)
+        if (To > range.To)
         {
-            return new Range[] { new Range(range.To, this.To) };
+            return new Range[] { new Range(range.To, To) };
+        }
+
+        if (From > range.From && To < range.To)
+        {
+            return new Range[] { new Range(From, To) };
         }
 
         return new Range[] { };
@@ -96,7 +69,6 @@ public class Range
 
     public override string ToString()
     {
-        return this.From + ", " + this.To;
+        return (From + ", " + To);
     }
 }
-

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace RangeTask;
+﻿namespace RangeTask;
 
 internal class Program
 {

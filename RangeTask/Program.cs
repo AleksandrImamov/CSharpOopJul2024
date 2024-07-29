@@ -71,11 +71,18 @@ internal class Program
 
         Range[] difference = range1.GetDifference(range2);
 
-        Console.WriteLine("Разность двух интервалов равна: ");
-
-        foreach (Range range in difference)
+        if (difference.Length == 0)
         {
-            Console.WriteLine(range);
+            Console.WriteLine("Разность двух интервалов не определена.");
+        }
+        else
+        {
+            Console.WriteLine("Разность двух интервалов равна: ");
+
+            foreach (Range range in difference)
+            {
+                Console.WriteLine(range);
+            }
         }
     }
 }

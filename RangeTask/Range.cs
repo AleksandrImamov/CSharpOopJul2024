@@ -59,16 +59,11 @@ public class Range
             return new Range[] { new Range(range.To, To) };
         }
 
-        if (From > range.From && To < range.To)
-        {
-            return new Range[] { new Range(From, To) };
-        }
-
         return new Range[] { };
     }
 
     public override string ToString()
     {
-        return (From + ", " + To);
+        return $"({From}, {To})";
     }
 }

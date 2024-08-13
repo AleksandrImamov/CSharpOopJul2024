@@ -1,73 +1,72 @@
-﻿namespace ShapesTask
+﻿namespace ShapesTask;
+
+internal class Circle : IShape, IComparable
 {
-    internal class Circle : IShape, IComparable
+    public double Radius { get; set; }
+
+    public Circle(double radius)
     {
-        public double Radius { get; set; }
+        Radius = radius;
+    }
 
-        public Circle(double radius)
+    public double GetWidth()
+    {
+        return Radius * 2;
+    }
+
+    public double GetHeight()
+    {
+        return Radius * 2;
+    }
+
+    public double GetArea()
+    {
+        return Math.PI * Math.Pow(Radius, 2);
+    }
+
+    public double GetPerimeter()
+    {
+        return Math.PI * (Radius * 2);
+    }
+
+    public override string ToString()
+    {
+        return $"({Radius})";
+    }
+
+    public override bool Equals(object? o)
+    {
+        if (ReferenceEquals(o, this))
         {
-            Radius = radius;
+            return true;
         }
 
-        public double GetWidth()
+        if (ReferenceEquals(o, null) || o.GetType() != GetType())
         {
-            return Radius * 2;
+            return false;
         }
 
-        public double GetHeight()
+        Circle circle = (Circle)o;
+
+        return Radius == circle.Radius;
+    }
+
+    public override int GetHashCode()
+    {
+        int prime = 31;
+        int hash = 1;
+
+        return hash = prime * hash + Radius.GetHashCode();
+    }
+
+    public int CompareTo(object? o)
+    {
+        if (o is IShape shape)
         {
-            return Radius * 2;
+            return GetArea().CompareTo(shape.GetArea());
+
         }
 
-        public double GetArea()
-        {
-            return Math.PI * Math.Pow(Radius, 2);
-        }
-
-        public double GetPerimeter()
-        {
-            return Math.PI * (Radius * 2);
-        }
-
-        public override string ToString()
-        {
-            return $"({Radius})";
-        }
-
-        public override bool Equals(object? o)
-        {
-            if (ReferenceEquals(o, this))
-            {
-                return true;
-            }
-
-            if (ReferenceEquals(o, null) || o.GetType() != GetType())
-            {
-                return false;
-            }
-
-            Circle circle = (Circle)o;
-
-            return Radius == circle.Radius;
-        }
-
-        public override int GetHashCode()
-        {
-            int prime = 31;
-            int hash = 1;
-
-            return hash = prime * hash + Radius.GetHashCode();
-        }
-
-        public int CompareTo(object? o)
-        {
-            if (o is IShape shape)
-            {
-                return GetArea().CompareTo(shape.GetArea());
-
-            }
-
-            throw new ArgumentNullException("Неверные параметры");
-        }
+        throw new ArgumentNullException("Неверные параметры");
     }
 }

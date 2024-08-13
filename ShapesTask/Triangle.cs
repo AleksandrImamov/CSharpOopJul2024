@@ -1,6 +1,6 @@
 ﻿namespace ShapesTask
 {
-    internal class Triangle : IShape
+    internal class Triangle : IShape, IComparable
     {
         double X1 { get; set; }
 
@@ -53,6 +53,54 @@
             double segment3Length = Math.Sqrt(Math.Pow(X3 - X1, 2) + Math.Pow(Y3 - Y1, 2));
 
             return segment1Length + segment2Length + segment3Length;
+        }
+
+        public override string ToString()
+        {
+            return $"({X1}, {Y1}, {X2}, {Y2}, {X3}, {Y3})";
+        }
+
+        public override bool Equals(object? o)
+        {
+            if (ReferenceEquals(o, this))
+            {
+                return true;
+            }
+
+            if (ReferenceEquals(o, null) || o.GetType != GetType)
+            {
+                return false;
+            }
+
+            Triangle triangle = (Triangle)o;
+
+            return X1 == triangle.X1 && Y1 == triangle.Y1 && X2 == triangle.X2 && Y2 == triangle.Y2 && X3 == triangle.X3 && Y3 == triangle.Y3;
+        }
+
+        public override int GetHashCode()
+        {
+            int prime = 31;
+            int hash = 1;
+
+            hash = prime * hash + X1.GetHashCode();
+            hash = prime * hash + Y1.GetHashCode();
+            hash = prime * hash + X2.GetHashCode();
+            hash = prime * hash + Y2.GetHashCode();
+            hash = prime * hash + X3.GetHashCode();
+            hash = prime * hash + Y3.GetHashCode();
+
+            return hash;
+        }
+
+        public int CompareTo(object? o)
+        {
+            if (o is IShape shape)
+            {
+                return GetArea().CompareTo(shape.GetArea());
+
+            }
+
+            throw new ArgumentNullException("Неверные параметры");
         }
     }
 }

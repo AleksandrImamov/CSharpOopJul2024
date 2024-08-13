@@ -4,11 +4,28 @@
     {
         static void Main(string[] args)
         {
-            Square square1 = new Square(10.5);
+            IShape[] shapes = { new Rectangle(5, 5), new Rectangle(2, 1), new Square(88), new Circle(23), new Triangle(0, 0, 5, 5, 0, 10) };
 
-            Square square2 = new Square(12);
+            Console.WriteLine(GetShapesArea(shapes));
+            Console.WriteLine(GetShapesPerimeter(shapes));
+        }
 
-            Console.WriteLine(square1);
+        public static IShape GetShapesArea(IShape[] shapes)
+        {
+            Array.Sort(shapes);
+
+            int maxShapeIndex = shapes.Length - 1;
+
+            return shapes[maxShapeIndex];
+        }
+
+        public static IShape GetShapesPerimeter(IShape[] shapes)
+        {
+            Array.Sort(shapes, new PerimeterComparer());
+
+            int maxShapeIndex = shapes.Length - 2;
+
+            return shapes[maxShapeIndex];
         }
     }
 }

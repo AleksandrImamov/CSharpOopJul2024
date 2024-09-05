@@ -1,6 +1,6 @@
 ﻿namespace ShapesTask;
 
-internal class Circle : IShape, IComparable
+internal class Circle : IShape
 {
     public double Radius { get; set; }
 
@@ -31,7 +31,7 @@ internal class Circle : IShape, IComparable
 
     public override string ToString()
     {
-        return $"({Radius})";
+        return $"Окружность (Радиус: {Radius})";
     }
 
     public override bool Equals(object? o)
@@ -56,17 +56,6 @@ internal class Circle : IShape, IComparable
         int prime = 31;
         int hash = 1;
 
-        return hash = prime * hash + Radius.GetHashCode();
-    }
-
-    public int CompareTo(object? o)
-    {
-        if (o is IShape shape)
-        {
-            return GetArea().CompareTo(shape.GetArea());
-
-        }
-
-        throw new ArgumentNullException("Неверные параметры");
+        return prime * hash + Radius.GetHashCode();
     }
 }

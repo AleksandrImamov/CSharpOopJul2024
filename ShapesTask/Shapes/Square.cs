@@ -1,37 +1,37 @@
 ﻿namespace ShapesTask;
 
-internal class Square : IShape, IComparable
+internal class Square : IShape
 {
-    public double SideLenth { get; set; }
+    public double SideLength { get; set; }
 
     public Square(double sideLength)
     {
-        SideLenth = sideLength;
+        SideLength = sideLength;
     }
 
     public double GetWidth()
     {
-        return SideLenth;
+        return SideLength;
     }
 
     public double GetHeight()
     {
-        return SideLenth;
+        return SideLength;
     }
 
     public double GetArea()
     {
-        return SideLenth * SideLenth;
+        return SideLength * SideLength;
     }
 
     public double GetPerimeter()
     {
-        return SideLenth * 4;
+        return SideLength * 4;
     }
 
     public override string ToString()
     {
-        return $"({SideLenth})";
+        return $"Квадрат (Длина стороны: {SideLength})";
     }
 
     public override bool Equals(object? o)
@@ -48,7 +48,7 @@ internal class Square : IShape, IComparable
 
         Square square = (Square)o;
 
-        return SideLenth == square.SideLenth;
+        return SideLength == square.SideLength;
     }
 
     public override int GetHashCode()
@@ -56,17 +56,6 @@ internal class Square : IShape, IComparable
         int prime = 31;
         int hash = 1;
 
-        return hash = prime * hash + SideLenth.GetHashCode();
-    }
-
-    public int CompareTo(object? o)
-    {
-        if (o is IShape shape)
-        {
-            return GetArea().CompareTo(shape.GetArea());
-
-        }
-
-        throw new ArgumentNullException("Неверный параметр");
+        return prime * hash + SideLength.GetHashCode();
     }
 }

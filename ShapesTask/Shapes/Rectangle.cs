@@ -1,6 +1,6 @@
 ﻿namespace ShapesTask;
 
-internal class Rectangle : IShape, IComparable
+internal class Rectangle : IShape
 {
     public double Width { get; set; }
 
@@ -34,7 +34,7 @@ internal class Rectangle : IShape, IComparable
 
     public override string ToString()
     {
-        return $"({Width}, {Height})";
+        return $"Прямоугольник (Ширина: {Width}, Высота: {Height})";
     }
 
     public override bool Equals(object? o)
@@ -60,19 +60,7 @@ internal class Rectangle : IShape, IComparable
         int hash = 1;
 
         hash = prime * hash + Width.GetHashCode();
-        hash = prime * hash + Height.GetHashCode();
 
-        return hash;
-    }
-
-    public int CompareTo(object? o)
-    {
-        if (o is IShape shape)
-        {
-            return GetArea().CompareTo(shape.GetArea());
-
-        }
-
-        throw new ArgumentNullException("Неверные параметры");
+        return prime * hash + Height.GetHashCode();
     }
 }

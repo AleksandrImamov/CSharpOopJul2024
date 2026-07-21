@@ -12,18 +12,18 @@ internal class Program
 
         Range range1 = new Range(from1, to1);
 
-        Console.WriteLine("Длина интервала равна: " + range1.GetLength());
+        Console.WriteLine("Длина интервала равна:" + range1.GetLength());
 
         Console.WriteLine("Введите любое число:");
         double number = Convert.ToDouble(Console.ReadLine());
 
         if (range1.IsInside(number))
         {
-            Console.WriteLine("Число " + number + " принадлежит интервалу");
+            Console.WriteLine("Число " + number + " принадлежит интервалу.");
         }
         else
         {
-            Console.WriteLine("Число " + number + " не принадлежит интервалу");
+            Console.WriteLine("Число " + number + " не принадлежит интервалу.");
         }
 
         Console.WriteLine("Введите начальное число интервала 1:");
@@ -46,22 +46,22 @@ internal class Program
 
         if (intersection is not null)
         {
-            Console.WriteLine("Интервал-пересечение двух интервалов равен: " + intersection);
+            Console.WriteLine("Интервал-пересечение двух интервалов равен:" + intersection);
         }
         else
         {
-            Console.WriteLine("Нет интервала-пересечения");
+            Console.WriteLine("Нет интервала-пересечения.");
         }
 
         Range[] union = range1.GetUnion(range2);
 
         if (union.Length == 1)
         {
-            Console.WriteLine("Объединение двух интервалов равно : " + union[0]);
+            Console.WriteLine("Объединение двух интервалов равно:" + union[0]);
         }
         else
         {
-            Console.WriteLine("Интервалы не пересекаются: ");
+            Console.WriteLine("Интервалы не пересекаются:");
 
             foreach (Range range in union)
             {
@@ -77,7 +77,7 @@ internal class Program
         }
         else
         {
-            Console.WriteLine("Разность двух интервалов равна: ");
+            Console.WriteLine("Разность двух интервалов равна:");
 
             foreach (Range range in difference)
             {

@@ -49,14 +49,14 @@ public class Range
             return new Range[] { new Range(From, range.From), new Range(range.To, To) };
         }
 
-        if (From < range.From && To > range.From)
+        if (To <= range.From)
         {
-            return new Range[] { new Range(From, range.From) };
+            return new Range[] {};
         }
 
-        if (From < range.To && To > range.To)
+        if (From < range.From && To < range.To)
         {
-            return new Range[] { new Range(range.To, To) };
+            return new Range[] { new Range(From, range.To) };
         }
 
         return new Range[] { };

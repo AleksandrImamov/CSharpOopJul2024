@@ -8,6 +8,10 @@ internal class Program
 
         Vector vector2 = new Vector([43, 15]);
 
+        vector1[1] = 123;
+
+        Console.WriteLine(vector1[1]);
+
         try
         {
             Vector vector3 = new Vector(0);
@@ -42,9 +46,7 @@ internal class Program
 
         Console.WriteLine(vector1.Reverse());
 
-        Console.WriteLine($"{vector2.GetLength():f2}");
-
-        vector1.SetComponent(2, 404);
+        Console.WriteLine($"{vector2.GetLength():f2}");        
 
         Console.WriteLine(vector1);
     }

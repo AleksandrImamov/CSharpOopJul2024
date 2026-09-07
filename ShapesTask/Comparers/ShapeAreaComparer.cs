@@ -1,4 +1,4 @@
-﻿namespace ShapesTask;
+﻿namespace ShapesTask.Shapes;
 
 internal class ShapeAreaComparer : IComparer<IShape>
 {
@@ -6,11 +6,12 @@ internal class ShapeAreaComparer : IComparer<IShape>
     {
         if (shape1 is null)
         {
-            throw new ArgumentNullException();
+            throw new ArgumentNullException("shape1");
         }
+
         if (shape2 is null)
         {
-            throw new ArgumentNullException();
+            throw new ArgumentNullException("shape2");
         }
 
         if (shape1.GetArea() > shape2.GetArea())

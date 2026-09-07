@@ -1,4 +1,4 @@
-﻿namespace ShapesTask;
+﻿namespace ShapesTask.Shapes;
 
 internal class Circle : IShape
 {
@@ -21,7 +21,7 @@ internal class Circle : IShape
 
     public double GetArea()
     {
-        return Math.PI * Math.Pow(Radius, 2);
+        return Math.PI * (Radius * Radius);
     }
 
     public double GetPerimeter()

@@ -1,4 +1,4 @@
-﻿namespace ShapesTask;
+﻿namespace ShapesTask.Shapes;
 
 internal class Rectangle : IShape
 {
@@ -60,7 +60,8 @@ internal class Rectangle : IShape
         int hash = 1;
 
         hash = prime * hash + Width.GetHashCode();
+        hash = prime * hash + Height.GetHashCode();
 
-        return prime * hash + Height.GetHashCode();
+        return hash;
     }
 }

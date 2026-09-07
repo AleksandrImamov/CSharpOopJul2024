@@ -1,6 +1,6 @@
-﻿namespace ShapesTask;
+﻿namespace ShapesTask.Shapes;
 
-internal class Triangle : IShape
+public class Triangle : IShape
 {
     public double X1 { get; set; }
 
@@ -34,32 +34,18 @@ internal class Triangle : IShape
         return Math.Max(Y1, Math.Max(Y2, Y3)) - Math.Min(Y1, Math.Min(Y2, Y3));
     }
 
-    private double GetSegment1Length()
-    {
-        return Math.Sqrt(Math.Pow(X2 - X1, 2) + Math.Pow(Y2 - Y1, 2));
-    }
-
-    private double GetSegment2Length()
-    {
-        return Math.Sqrt(Math.Pow(X3 - X2, 2) + Math.Pow(Y3 - Y2, 2));
-    }
-
-    private double GetSegment3Length()
-    {
-        return Math.Sqrt(Math.Pow(X3 - X1, 2) + Math.Pow(Y3 - Y1, 2));
-    }
-
     public double GetArea()
     {
-        double semiPerimeter = (GetSegment1Length() + GetSegment2Length() + GetSegment3Length()) / 2;
-
-        return Math.Sqrt(semiPerimeter * (semiPerimeter - GetSegment1Length()) *
-            (semiPerimeter - GetSegment2Length()) * (semiPerimeter - GetSegment3Length()));
+        return (Math.Abs(X1 * (Y2 - Y3) + X2 * (Y3 - Y1) + X3 * (Y1 - Y2))) / 2;
     }
 
     public double GetPerimeter()
     {
-        return GetSegment1Length() + GetSegment2Length() + GetSegment3Length();
+        double segment1Length = Math.Sqrt(Math.Pow(X2 - X1, 2) + Math.Pow(Y2 - Y1, 2));
+        double segment2Length = Math.Sqrt(Math.Pow(X3 - X2, 2) + Math.Pow(Y3 - Y2, 2));
+        double segment3Length = Math.Sqrt(Math.Pow(X3 - X1, 2) + Math.Pow(Y3 - Y1, 2));
+
+        return segment1Length + segment2Length + segment3Length;
     }
 
     public override string ToString()
@@ -96,7 +82,8 @@ internal class Triangle : IShape
         hash = prime * hash + X2.GetHashCode();
         hash = prime * hash + Y2.GetHashCode();
         hash = prime * hash + X3.GetHashCode();
+        hash = prime * hash + Y3.GetHashCode();
 
-        return prime * hash + Y3.GetHashCode();
+        return hash;
     }
 }

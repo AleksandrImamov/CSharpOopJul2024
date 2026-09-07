@@ -1,4 +1,4 @@
-﻿namespace ShapesTask;
+﻿namespace ShapesTask.Shapes;
 
 internal class Program
 {
@@ -13,21 +13,24 @@ internal class Program
             new Triangle(0, 0, 5, 5, 0, 10)
         };
 
-        Console.WriteLine(GetShapeWithMaximumArea(shapes));
+        Console.WriteLine(GetShapeWithMaxArea(shapes));
         Console.WriteLine(GetShapeWithSecondPerimeter(shapes));
+
+        Triangle triangle = new Triangle(0, 0, 1, 1, 2, 0);
+        double trianglePerimeter = triangle.GetPerimeter();
     }
 
-    public static IShape GetShapeWithMaximumArea(IShape[] shapes)
+    public static IShape GetShapeWithMaxArea(IShape[] shapes)
     {
         Array.Sort(shapes, new ShapeAreaComparer());
 
-        return shapes[shapes.Length - 1];
+        return shapes[^1];
     }
 
     public static IShape GetShapeWithSecondPerimeter(IShape[] shapes)
     {
         Array.Sort(shapes, new ShapePerimeterComparer());
 
-        return shapes[shapes.Length - 2];
+        return shapes[^2];
     }
 }
